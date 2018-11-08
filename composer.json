@@ -1,7 +1,8 @@
 {
   "name": "Hack-a-Dog NBA",
   "require": {
-    "jasonroman/nba-api": "^1.0"
+    "jasonroman/nba-api": "^1.0",
+    "datadog/php-datadogstatsd": "1.3.*"
   },
   "scripts": {
      "test": "cd app; php -S localhost:8000 main.php"
