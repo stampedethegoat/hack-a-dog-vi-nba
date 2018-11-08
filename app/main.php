@@ -4,5 +4,6 @@ require_once '../vendor/autoload.php';
 include 'helpers.php';
 include 'client.php';
 
-prettyPrint($responseBody);
+$nbaGames = calculateTotalNBAGames($response);
+prettyPrint($nbaGames);
 ?>
