@@ -11,8 +11,10 @@
   "license": "ISC",
   "dependencies": {
     "axios": "0.18.0",
+    "dogapi": "2.8.3",
     "dotenv": "6.1.0",
     "express": "4.16.4",
+    "fs": "0.0.1-security",
     "nba": "4.5.0"
   }
 }
