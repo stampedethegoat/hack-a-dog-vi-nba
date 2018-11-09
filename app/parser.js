@@ -7,21 +7,23 @@ datadog.initialize({
   app_key : process.env.APP_KEY,
 });
 
-fs.readFile('../data/all-teams.json', function (err, data) {
+fs.readFile('../data/all-teams.json', (err, data) => {
   if (err) throw err;
   let parsedTeams = JSON.parse(data);
   parsedTeams.forEach((item, index) => {
-    if (item['team']['team_id'] === 'sacramento-kings'){
-      datadog.metric.send("nba.kings.wins", item['won']);
-      datadog.metric.send("nba.kings.lost", item['lost']);
-      datadog.metric.send("nba.kings.games_played", item['games_played']);
-      datadog.metric.send("nba.kings.points", item['stats']['points']);
-      datadog.metric.send("nba.kings.assists", item['stats']['assists']);
-      datadog.metric.send("nba.kings.rebounds", item['stats']['rebounds']);
-      datadog.metric.send("nba.kings.blocks", item['stats']['blocks']);
-      datadog.metric.send("nba.kings.steals", item['stats']['steals']);
-      datadog.metric.send("nba.kings.turnovers", item['stats']['turnovers']);
+    if (index === 1) {
+      console.log(`item`, item);
     }
+    let team = item['team']['team_id'];
+    datadog.metric.send(`nba.total_wins`         , item['won']                , {tags: [`team:${team}`]});
+    datadog.metric.send(`nba.total_lost`         , item['lost']               , {tags: [`team:${team}`]});
+    datadog.metric.send(`nba.total_games_played` , item['games_played']       , {tags: [`team:${team}`]});
+    datadog.metric.send(`nba.total_points`       , item['stats']['points']    , {tags: [`team:${team}`]});
+    datadog.metric.send(`nba.total_assists`      , item['stats']['assists']   , {tags: [`team:${team}`]});
+    datadog.metric.send(`nba.total_rebounds`     , item['stats']['rebounds']  , {tags: [`team:${team}`]});
+    datadog.metric.send(`nba.total_blocks`       , item['stats']['blocks']    , {tags: [`team:${team}`]});
+    datadog.metric.send(`nba.total_steals`       , item['stats']['steals']    , {tags: [`team:${team}`]});
+    datadog.metric.send(`nba.total_turnovers`    , item['stats']['turnovers'] , {tags: [`team:${team}`]});
   });
 });
 
