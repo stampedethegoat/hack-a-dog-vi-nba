@@ -11,9 +11,7 @@ fs.readFile('../data/all-teams.json', (err, data) => {
   if (err) throw err;
   let parsedTeams = JSON.parse(data);
   parsedTeams.forEach((item, index) => {
-    if (index === 1) {
-      console.log(`item`, item);
-    }
+    if (index === 1) console.log(`item`, item);
     let team = item['team']['team_id'];
     datadog.metric.send(`nba.total_wins`         , item['won']                , {tags: [`team:${team}`]});
     datadog.metric.send(`nba.total_lost`         , item['lost']               , {tags: [`team:${team}`]});
